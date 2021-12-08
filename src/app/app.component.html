@@ -1,0 +1,51 @@
+<nav class="navbar navbar-light bg-success">
+    <div class="container ">
+        <a class="navbar-brand" href="#">
+            <img src="assets/logo-texproil.png" alt="" width="40" height="35">
+        </a>
+    </div>
+</nav>
+<div *ngIf="!cambiar" class="row justify-content-center mt-4">
+    <div class="col-8 ">
+        <div class="list-group">
+            <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                Listado tareas
+            </button>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col">Nombre</div>
+                    <div class="col">Sector</div>
+                    <div class="col">Estado</div>
+                    <div class="col">fechaInicio</div>
+                </div>
+            </li>
+            <ng-container *ngFor="let tarea of tareas">
+                <li class="list-group-item list-group-item-action" (click)="seleccionarEstado()">
+                    <div class="row">
+                        <div class="col">{{tarea.nombre}}</div>
+                        <div class="col">{{tarea.sector.nombre}}</div>
+                        <div class="col">{{tarea.estado[tarea.estado.length-1].tipoEstado.nombre}}</div>
+                        <div class="col">{{tarea.estado[tarea.estado.length-1].fechaInicio | date:'short'}}</div>
+                    </div>
+                </li>
+            </ng-container>
+
+
+
+        </div>
+    </div>
+</div>
+
+<div *ngIf="cambiar" class="row justify-content-center mt-4">
+    <div class="col-8 ">
+        <ng-container *ngFor="let estado of estados">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    {{estado.nombre}}
+                </label>
+            </div>
+        </ng-container>
+        <button type="button" (click)="cambiarEstado()" class="btn btn-primary">cambiar estado</button>
+    </div>
+</div>
